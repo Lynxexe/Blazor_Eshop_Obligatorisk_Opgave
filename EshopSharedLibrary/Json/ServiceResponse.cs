@@ -10,5 +10,11 @@ namespace EshopSharedLibrary.Json
     {
         public bool Success { get; set; }
         public string? Message { get; set; }
+
+        public ServiceResponse(bool success, string? message)
+        {
+            Success = success;
+            Message = message;
+        }
     }
 }
