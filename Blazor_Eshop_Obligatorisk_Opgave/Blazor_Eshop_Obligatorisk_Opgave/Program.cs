@@ -1,5 +1,6 @@
-using Blazor_Eshop_Obligatorisk_Opgave.Client.Pages;
 using Blazor_Eshop_Obligatorisk_Opgave.Components;
+using EshopSharedLibrary.Interface;
+using EshopSharedLibrary.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

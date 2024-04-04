@@ -4,10 +4,22 @@ using EshopSharedLibrary.Model;
 
 namespace EshopSharedLibrary.Service
 {
-    public class ProductService : IProductService
+    public class ProductService : IProductService //Skal håndtere på ServerSiden, ClientService er beregnet til at blive brugt på Client-siden og kommunikere via HTTP Requests.
     {
         public List<Product> products = new List<Product>();
         public List<Product> cart = new List<Product>();
+
+        private readonly List<Product> _products;
+
+        public ProductService()
+        {
+            _products = new List<Product>
+        {
+            new Product { Id = 1, Name = "Product 1", Price = 100 },
+            new Product { Id = 2, Name = "Product 2", Price = 200 },
+            // Tilføj flere produkter efter behov
+        };
+        }
 
         public async Task<ServiceResponse> AddProduct(Product model)
         {
@@ -30,6 +42,9 @@ namespace EshopSharedLibrary.Service
             }
             return new ServiceResponse { Success = false, Message = "Product not found" };
         }
+        public async Task<int> GetCartCount()
+        {
+            return cart.Count;
+        }
     }
-
 }

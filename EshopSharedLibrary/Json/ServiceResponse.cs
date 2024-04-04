@@ -16,5 +16,6 @@ namespace EshopSharedLibrary.Json
             Success = success;
             Message = message;
         }
+        public ServiceResponse() { }
     }
 }
