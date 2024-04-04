@@ -3,58 +3,26 @@
 @using EshopSharedLibrary.Interface
 @using EshopSharedLibrary.Model
 @inject IProductService ProductService
-@inject NavigationManager navigationManager
 
 <PageTitle>Product listings</PageTitle>
- <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
-        <div id="vue-shop" class="margin-bottom:32 quenched">
-            <div class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
-                <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:100">
-                    <ErrorBoundary>
-                        <ChildContent>
-                        <ul class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
-                            @foreach(var product in products)
-                            {
-                                <ProductListingItem Product="product"></ProductListingItem>
-                            }                        
-                        </ul>
-                        </ChildContent>
-                        <ErrorContent>
-                            <p>There is an error getting the products.</p>
-                        </ErrorContent>
-                    </ErrorBoundary>
-                </div>
-            </div>
-        </div>
-    </main>
-    }
 
-
-@if (products == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
+<main class="container">
+    <div class="row">
+        @if (products == null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
             @foreach (var product in products)
             {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>@product.Price</td>
-                </tr>
+                <div class="col-md-3 mb-4">
+                    <ProductListingItem Product="product"></ProductListingItem>
+                </div>
             }
-        </tbody>
-    </table>
-}
-
+        }
+    </div>
+</main>
 
 @code {
     private List<Product> products;

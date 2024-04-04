@@ -13,12 +13,17 @@ namespace EshopSharedLibrary.Service
 
         public ProductService()
         {
-            products = new List<Product>
-        {
-            new Product { Id = 1, Name = "Product 1", Price = 100 },
-            new Product { Id = 2, Name = "Product 2", Price = 200 },
-            // Tilføj flere produkter efter behov
-        };
+            products = new List<Product>()
+            {
+                new Product(1, "BUBBLES-GUMBALL-APRON", "A Gumball for Your Thoughts Apron", 24, "bubbles-gumball-apron-black.jpg"),
+                new Product(2, "REX-MICROCONTROLLERS-APRON", "Great Microcontrollers Think Alike Apron", 24, "rex-microcontrollers-apron-black.jpg"),
+                new Product(3, "DOLORES-COMPUTE-BASEBALLHAT", "I Compute, Therefore I Am Baseball Hat", 29, "dolores-compute-baseballhat-black.jpg"),
+                new Product(4, "BUBBLES-GUMBALL-BASEBALLHAT", "A Gumball for Your Thoughts Baseball Hat", 29, "bubbles-gumball-baseballhat-black.jpg"),
+                new Product(5, "REX-MICROCONTROLLERS-BASEBALLHAT", "Great Microcontrollers Think Alike Baseball Hat", 29, "rex-microcontrollers-baseballhat-black.jpg"),
+                new Product(6, "DOLORES-COMPUTE-MUG", "I Compute, Therefore I Am Mug", 16, "dolores-compute-mug-black.jpg"),
+                new Product(7, "DOLORES-COMPUTE-TSHIRT", "I Compute, Therefore I Am T-shirt", 26, "dolores-compute-tshirt-black.jpg"),
+                new Product(8, "REX-MICROCONTROLLERS-TSHIRT", "Great Microcontrollers Think Alike T-shirt", 26, "rex-microcontrollers-tshirt-black.jpg")
+            };
         }
 
         public async Task<ServiceResponse> AddProduct(Product model)
@@ -37,7 +42,6 @@ namespace EshopSharedLibrary.Service
             var product = products.FirstOrDefault(p => p.Id == productId);
             if (product != null)
             {
-                product.Quantity += quantity;
                 return new ServiceResponse { Success = true, Message = "Product added to cart" };
             }
             return new ServiceResponse { Success = false, Message = "Product not found" };
@@ -45,6 +49,11 @@ namespace EshopSharedLibrary.Service
         public async Task<int> GetCartCount()
         {
             return cart.Count;
+        }
+        public string GetImageUrl(string filename)
+        {
+            // Assuming your images are served from the 'images' folder under 'wwwroot'
+            return $"/images/{filename}";
         }
     }
 }

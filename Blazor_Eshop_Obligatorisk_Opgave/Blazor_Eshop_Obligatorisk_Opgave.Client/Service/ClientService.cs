@@ -62,5 +62,10 @@ namespace Blazor_Eshop_Obligatorisk_Opgave.Client.Service
         {
             return null;
         }
+        public string GetImageUrl(string filename)
+        {
+            // Assuming your images are served from the 'images' folder under 'wwwroot'
+            return $"/images/{filename}";
+        }
     }
 }

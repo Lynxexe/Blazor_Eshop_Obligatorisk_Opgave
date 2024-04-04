@@ -13,6 +13,7 @@ namespace EshopSharedLibrary.Interface
         Task<ServiceResponse> AddProduct(Product model);
         Task<List<Product>> GetAllProducts();
         Task<ServiceResponse> AddToCart(int productId, int quantity);
-       Task<int> GetCartCount();
+        Task<int> GetCartCount();
+        string GetImageUrl(string filename);
     }
 }

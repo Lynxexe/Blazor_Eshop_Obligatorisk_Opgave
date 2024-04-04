@@ -9,16 +9,28 @@ namespace EshopSharedLibrary.Model
     public class Product
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public decimal Price { get; set; }
-        public string? Image { get; set; }
-        public int Quantity { get; set; }
+        public string Sku { get; }
+
+        public string Name { get; }
+
+        public decimal Price { get; }
+
+        public string Image { get; }
+
         public string FullUrl
         {
             get
             {
                 return string.Format("/product/{0}", Id);
             }
+        }
+        public Product(int id, string sku, string name, decimal price, string image)
+        {
+            Id = id;
+            Sku = sku;
+            Name = name;
+            Price = price;
+            Image = image;
         }
     }
 }
