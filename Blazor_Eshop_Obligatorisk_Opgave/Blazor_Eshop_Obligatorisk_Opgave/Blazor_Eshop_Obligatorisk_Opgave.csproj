@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\Pages\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\Blazor_Eshop_Obligatorisk_Opgave.Client\Pages\Hero.razor" Link="Hero.razor" />
   </ItemGroup>
 

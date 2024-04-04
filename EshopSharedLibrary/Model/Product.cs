@@ -13,5 +13,12 @@ namespace EshopSharedLibrary.Model
         public decimal Price { get; set; }
         public string? Image { get; set; }
         public int Quantity { get; set; }
+        public string FullUrl
+        {
+            get
+            {
+                return string.Format("/product/{0}", Id);
+            }
+        }
     }
 }

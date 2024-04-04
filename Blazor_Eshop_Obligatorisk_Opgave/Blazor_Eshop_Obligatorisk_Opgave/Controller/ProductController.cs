@@ -37,5 +37,6 @@ namespace Blazor_Eshop_Obligatorisk_Opgave.Controller
             var response = await _productService.AddProduct(model);
             return Ok(response);
         }
+
     }
 }
