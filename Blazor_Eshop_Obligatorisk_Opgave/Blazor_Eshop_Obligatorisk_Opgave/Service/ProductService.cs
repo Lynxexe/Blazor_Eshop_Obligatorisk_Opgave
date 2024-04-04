@@ -4,7 +4,7 @@ using EshopSharedLibrary.Model;
 
 namespace Blazor_Eshop_Obligatorisk_Opgave.Repository
 {
-    public class ProductRepository : IProductService
+    public class ProductService : IProductService
     {
         public Task<ServiceResponse> AddProduct(Product model)
         {
