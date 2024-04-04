@@ -7,13 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EshopSharedLibrary\EshopSharedLibrary.csproj" />
-    <ProjectReference Include="..\Blazor_Eshop_Obligatorisk_Opgave.Client\Blazor_Eshop_Obligatorisk_Opgave.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
+    <Content Remove="Hero.razor" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Blazor_Eshop_Obligatorisk_Opgave.Client\Pages\Hero.razor" Link="Hero.razor" />
+    <None Include="Hero.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EshopSharedLibrary\EshopSharedLibrary.csproj" />
+    <ProjectReference Include="..\Blazor_Eshop_Obligatorisk_Opgave.Client\Blazor_Eshop_Obligatorisk_Opgave.Client.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
   </ItemGroup>
 
 </Project>

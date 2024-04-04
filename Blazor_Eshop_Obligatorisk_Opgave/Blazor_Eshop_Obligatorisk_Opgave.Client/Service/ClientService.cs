@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
 using EshopSharedLibrary.Json;
-using EshopSharedLibrary.Model;
 using EshopSharedLibrary.Interface;
+using EshopSharedLibrary.Model.Product;
 
 namespace Blazor_Eshop_Obligatorisk_Opgave.Client.Service
 {

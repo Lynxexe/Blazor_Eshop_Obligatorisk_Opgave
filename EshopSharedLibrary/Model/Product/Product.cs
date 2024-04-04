@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EshopSharedLibrary.Model
+namespace EshopSharedLibrary.Model.Product
 {
     public class Product
     {

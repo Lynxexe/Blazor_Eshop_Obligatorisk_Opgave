@@ -1,5 +1,5 @@
 ﻿using EshopSharedLibrary.Json;
-using EshopSharedLibrary.Model;
+using EshopSharedLibrary.Model.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
