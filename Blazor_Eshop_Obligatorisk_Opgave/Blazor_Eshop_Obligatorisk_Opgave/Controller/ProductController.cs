@@ -25,6 +25,7 @@ namespace Blazor_Eshop_Obligatorisk_Opgave.Controller
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
+            Console.WriteLine("getting products...");
             var products = await _productService.GetAllProducts(); 
             return Ok(products);
         }

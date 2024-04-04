@@ -14,10 +14,9 @@
 <Footer />
 
 @code {
-    private int cartCount;
     protected override async Task OnInitializedAsync()
     {
-        cartCount = await ProductService.GetCartCount();
+        ProductService.GetAllProducts();
         await base.OnInitializedAsync();
     }
 }

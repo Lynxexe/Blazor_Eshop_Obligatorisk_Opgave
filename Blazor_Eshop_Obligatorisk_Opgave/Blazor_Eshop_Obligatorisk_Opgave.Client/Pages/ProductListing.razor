@@ -5,5 +5,27 @@
 @inject NavigationManager navigationManager
 
 <PageTitle>Product listings</PageTitle>
+
+@if (products == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    foreach (var product in products)
+    {
+        <div>
+            <h3>@product.Name</h3>
+            <p>Price: @product.Price</p>
+        </div>
+    }
+}
+
 @code {
+    private List<Product> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductService.GetAllProducts();
+    }
 }

@@ -10,7 +10,6 @@ namespace Blazor_Eshop_Obligatorisk_Opgave.Client.Service
     {
         private const string BaseUrl = "api/product";
 
-
         private static string SerializeObj(object modelObject) => JsonSerializer.Serialize(modelObject, JsonOptions());
         private static T DeserializeJsonString<T>(string jsonString) => JsonSerializer.Deserialize<T>(jsonString, JsonOptions())!;
         private static StringContent GenerateStringContent(string serialiazedObj) => new(serialiazedObj, System.Text.Encoding.UTF8, "application/json");
