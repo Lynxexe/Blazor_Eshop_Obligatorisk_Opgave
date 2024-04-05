@@ -2,7 +2,7 @@
 using System.Text.Json;
 using EshopSharedLibrary.Json;
 using EshopSharedLibrary.Interface;
-using EshopSharedLibrary.Model.Product;
+using EshopSharedLibrary.Model.ProductModel;
 
 namespace Blazor_Eshop_Obligatorisk_Opgave.Client.Service
 {

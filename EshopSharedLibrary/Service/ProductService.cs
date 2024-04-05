@@ -1,6 +1,7 @@
 ﻿using EshopSharedLibrary.Interface;
 using EshopSharedLibrary.Json;
-using EshopSharedLibrary.Model.Product;
+using EshopSharedLibrary.Model.ProductModel;
+
 
 namespace EshopSharedLibrary.Service
 {

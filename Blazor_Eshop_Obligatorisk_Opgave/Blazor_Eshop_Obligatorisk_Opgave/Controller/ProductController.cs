@@ -1,6 +1,6 @@
 ﻿using EshopSharedLibrary.Interface;
 using EshopSharedLibrary.Json;
-using EshopSharedLibrary.Model.Product;
+using EshopSharedLibrary.Model.ProductModel;
 using EshopSharedLibrary.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
