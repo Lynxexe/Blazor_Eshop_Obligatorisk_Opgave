@@ -9,10 +9,10 @@ namespace EshopSharedLibrary.Model.ShoppingCart
 {
     public class ShoppingCart
     {
-        public IList<ShoppingCartItem>? Items { get; init; }
+        public List<ShoppingCartItem> ItemsInCart { get; set; }
         public ShoppingCart()
         {
-            Items = new List<ShoppingCartItem>();
+            ItemsInCart = new List<ShoppingCartItem>();
         }
     }
 }
