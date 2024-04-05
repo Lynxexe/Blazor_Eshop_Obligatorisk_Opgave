@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models
+namespace EshopSharedLibrary.Model.ShoppingCartModel
 {
-    public class ShoppingCartCountModel
+public class ShoppingCartCount
     {
         public int Count { get; set; }
 
@@ -16,5 +16,6 @@ namespace MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models
         {
             CountChange?.Invoke();
         }
+
     }
 }

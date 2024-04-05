@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlazorShopHosted.Libraries.Shared.ShoppingCart.Models
+namespace EshopSharedLibrary.Model.ShoppingCartModel
 {
-    public class ShoppingCartAddModel
+    public class ShoppingCartAdd
     {
-        public string? ProductSku { get; set; }
+        public int ProductId { get; set; }
 
         public int Quantity { get; set; }
     }

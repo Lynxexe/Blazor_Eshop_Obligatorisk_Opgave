@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EshopSharedLibrary.Model.Product
+namespace EshopSharedLibrary.Model.ProductModel
 {
     public class Product
     {
@@ -32,5 +32,6 @@ namespace EshopSharedLibrary.Model.Product
             Price = price;
             Image = image;
         }
+        public Product() { }
     }
 }
