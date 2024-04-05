@@ -27,18 +27,18 @@ namespace EshopSharedLibrary.Service
             };
         }
 
-        public async Task<ServiceResponse> AddProduct(Product model)
+        public ServiceResponse AddProduct(Product model)
         {
             products.Add(model);
             return new ServiceResponse { Success = true, Message = "Product added successfully" };
         }
 
-        public async Task<List<Product>> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             return products;
         }
 
-        public async Task<ServiceResponse> AddToCart(int productId, int quantity)
+        public ServiceResponse AddToCart(int productId, int quantity)
         {
             var product = products.FirstOrDefault(p => p.Id == productId);
             if (product != null)
@@ -47,13 +47,12 @@ namespace EshopSharedLibrary.Service
             }
             return new ServiceResponse { Success = false, Message = "Product not found" };
         }
-        public async Task<int> GetCartCount()
+        public int GetCartCount()
         {
             return cart.Count;
         }
         public string GetImageUrl(string filename)
         {
-            // Assuming your images are served from the 'images' folder under 'wwwroot'
             return $"/images/{filename}";
         }
     }

@@ -42,8 +42,9 @@ else
 @code {
     private List<Product> products;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        products = await ProductService.GetAllProducts();
+        products = ProductService.GetAllProducts();
     }
 }
+
