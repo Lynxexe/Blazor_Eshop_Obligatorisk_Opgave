@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using Blazor_Eshop_Obligatorisk_Opgave.Client.Components
+@using Blazor_Eshop_Obligatorisk_Opgave.Client.Pages.Components
 @using EshopSharedLibrary.Interface
 @using EshopSharedLibrary.Model.ProductModel
 @inject IProductService ProductService
 @inject NavigationManager navigationManager
+@rendermode InteractiveAuto
 @if (products == null)
 {
     <p>Loading...</p>
