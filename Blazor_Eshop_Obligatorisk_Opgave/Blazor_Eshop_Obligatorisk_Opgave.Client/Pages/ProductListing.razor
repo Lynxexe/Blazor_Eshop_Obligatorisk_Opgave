@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using Blazor_Eshop_Obligatorisk_Opgave.Client.Components
+@using Blazor_Eshop_Obligatorisk_Opgave.Client.Pages.Components
 @using EshopSharedLibrary.Interface
-@using EshopSharedLibrary.Model.Product
+@using EshopSharedLibrary.Model.ProductModel
 @inject IProductService ProductService
 @inject NavigationManager navigationManager
+@rendermode InteractiveAuto
 @if (products == null)
 {
     <p>Loading...</p>
@@ -42,8 +44,9 @@ else
 @code {
     private List<Product> products;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        products = await ProductService.GetAllProducts();
+        products = ProductService.GetAllProducts();
     }
 }
+

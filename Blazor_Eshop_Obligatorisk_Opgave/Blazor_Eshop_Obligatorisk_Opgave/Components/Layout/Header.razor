@@ -35,9 +35,9 @@
 @code {
     private int cartCount;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        cartCount = await ProductService.GetCartCount();
-        await base.OnInitializedAsync();
+        cartCount = ProductService.GetCartCount();
+        base.OnInitialized();
     }
 }
