@@ -1,6 +1,6 @@
 ﻿@using EshopSharedLibrary;
 @using EshopSharedLibrary.Interface
-@inject IProductService ProductService
+@inject IShoppingCartService ShoppingCartService
 
 <div id="vue-header" class="quenched">
     <header class="border-bottom-color:neutral-000000 border-bottom-style:solid border-bottom-width:1 display:block padding-vertical:8">
@@ -37,7 +37,7 @@
 
     protected override void OnInitialized()
     {
-        cartCount = ProductService.GetCartCount();
+        cartCount = ShoppingCartService.Count();
         base.OnInitialized();
     }
 }

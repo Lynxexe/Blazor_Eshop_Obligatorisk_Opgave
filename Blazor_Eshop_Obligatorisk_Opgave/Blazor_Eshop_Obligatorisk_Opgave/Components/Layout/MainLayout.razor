@@ -1,6 +1,7 @@
 ﻿@using EshopSharedLibrary.Interface
 @using EshopSharedLibrary.Model;
 @inject IProductService ProductService
+@inject IShoppingCartService ShoppingCartService
 @inherits LayoutComponentBase
 
 
@@ -18,6 +19,7 @@
     protected override async Task OnInitializedAsync()
     {
         ProductService.GetAllProducts();
+
         await base.OnInitializedAsync();
     }
 }

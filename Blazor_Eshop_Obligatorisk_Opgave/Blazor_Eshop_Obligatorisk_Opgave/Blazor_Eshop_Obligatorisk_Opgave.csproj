@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Hero.razor" />
+    <None Include="Components\Hero.razor" />
   </ItemGroup>
 
   <ItemGroup>
