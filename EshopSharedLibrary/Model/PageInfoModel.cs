@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Blazor_Eshop_Obligatorisk_Opgave.Client.Components
+namespace EshopSharedLibrary.Model
 {
     public abstract class PageInfoModel : ComponentBase
     {

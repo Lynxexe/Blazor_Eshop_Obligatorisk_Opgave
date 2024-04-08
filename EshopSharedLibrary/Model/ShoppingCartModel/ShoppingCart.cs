@@ -12,7 +12,10 @@ namespace EshopSharedLibrary.Model.ShoppingCart
         public List<ShoppingCartItem> ItemsInCart { get; set; }
         public ShoppingCart()
         {
-            ItemsInCart = new List<ShoppingCartItem>();
+            if (ItemsInCart == null)
+            {
+                ItemsInCart = new List<ShoppingCartItem>();
+            }
         }
     }
 }

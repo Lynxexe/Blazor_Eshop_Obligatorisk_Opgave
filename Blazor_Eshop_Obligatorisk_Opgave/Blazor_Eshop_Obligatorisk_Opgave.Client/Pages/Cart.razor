@@ -1,8 +1,11 @@
 ﻿@page "/cart"
-@using Blazor_Eshop_Obligatorisk_Opgave.Client.Components
-@using Blazor_Eshop_Obligatorisk_Opgave.Client.Template
+@using Blazor_Eshop_Obligatorisk_Opgave.Client.Pages.ShopComponents
+@using EshopSharedLibrary.Interface
 @using EshopSharedLibrary.Model.ShoppingCart
-@using EshopSharedLibrary.Model.ShoppingCartModel;
+@using EshopSharedLibrary.Model.ShoppingCartModel
+@using EshopSharedLibrary.Model
+@inject IShoppingCartService shoppingCartService
+@rendermode InteractiveAuto
 
 <h3>Cart</h3>
 
@@ -13,11 +16,11 @@
             <div class="display:flex flex-direction:column color:blue-265f8e margin-bottom:12">
                 <TableTemplate HeaderNames="@TableHeaderNames">
                     <RowTemplate>
-                        @if (ShoppingCartItems?.ItemsInCart != null)
+                        @if (shoppingCart?.ItemsInCart != null)
                         {
-                            @foreach (var item in ShoppingCartItems.ItemsInCart)
+                            @foreach (var item in shoppingCart.ItemsInCart)
                             {
-                                <ShoppingCartItem Item="item"></ShoppingCartItem>
+                                <CartItem Item="item"></CartItem>
                             }
                         }
                     </RowTemplate>
@@ -35,5 +38,10 @@
         new TableHeaderName("Remove", 1)
     };
 
-    private ShoppingCart ShoppingCartItems { get; set; }
+    private ShoppingCart shoppingCart { get; set; }
+
+    protected override void OnInitialized()
+    {
+        shoppingCart = shoppingCartService.Get();
+    }
 }

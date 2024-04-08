@@ -1,6 +1,7 @@
 using Blazor_Eshop_Obligatorisk_Opgave.Components;
 using EshopSharedLibrary.Interface;
 using EshopSharedLibrary.Service;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddServerSideBlazor();
 
 
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 
 var app = builder.Build();
 

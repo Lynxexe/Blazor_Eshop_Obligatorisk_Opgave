@@ -1,4 +1,4 @@
-﻿namespace Blazor_Eshop_Obligatorisk_Opgave.Client.Components
+﻿namespace EshopSharedLibrary.Model
 {
     public class TableHeaderName
     {
