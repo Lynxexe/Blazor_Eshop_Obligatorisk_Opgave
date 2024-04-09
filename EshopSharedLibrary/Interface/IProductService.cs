@@ -15,5 +15,6 @@ namespace EshopSharedLibrary.Interface
         ServiceResponse AddToCart(int productId, int quantity);
         int GetCartCount();
         string GetImageUrl(string filename);
+        Product GetProductById(int productId);
     }
 }

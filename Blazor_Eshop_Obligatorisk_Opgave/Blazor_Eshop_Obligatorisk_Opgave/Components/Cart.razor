@@ -4,11 +4,10 @@
 @using EshopSharedLibrary.Model.ShoppingCart
 @using EshopSharedLibrary.Model.ShoppingCartModel
 @using EshopSharedLibrary.Model
+
 @inject IShoppingCartService shoppingCartService
-@rendermode InteractiveAuto
-
+@rendermode InteractiveServer
 <h3>Cart</h3>
-
 <div id="vue-cart" class="quenched">
     <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
         <div>
@@ -20,7 +19,7 @@
                         {
                             @foreach (var item in shoppingCart.ItemsInCart)
                             {
-                                <CartItem Item="item"></CartItem>
+                                <CartItem Item="item" OnItemDeleted="HandleItemDeleted"></CartItem>
                             }
                         }
                     </RowTemplate>
@@ -29,6 +28,7 @@
         </div>
     </main>
 </div>
+
 @code {
     private List<TableHeaderName> TableHeaderNames = new() {
         new TableHeaderName("Product", 2),
@@ -39,9 +39,14 @@
     };
 
     private ShoppingCart shoppingCart { get; set; }
-
     protected override void OnInitialized()
     {
+        shoppingCart = shoppingCartService.Get();
+    }
+    private async Task HandleItemDeleted(ShoppingCartItem deletedItem)
+    {
+        // Update the cart after item deletion
+        shoppingCartService.DeleteProduct(deletedItem);
         shoppingCart = shoppingCartService.Get();
     }
 }

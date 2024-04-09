@@ -16,5 +16,6 @@ namespace EshopSharedLibrary.Interface
             void DeleteProduct(ShoppingCartItem item);
             int Count();
             bool HasProduct(int Id);
-        }
+            event Action OnChange;
+    }
 }

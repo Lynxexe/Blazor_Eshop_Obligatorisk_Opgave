@@ -12,8 +12,8 @@ builder.Services.AddRazorComponents()
 builder.Services.AddServerSideBlazor();
 
 
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddSingleton<IProductService, ProductService>();
+builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
 
 var app = builder.Build();
 

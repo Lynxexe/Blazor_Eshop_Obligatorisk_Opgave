@@ -1,7 +1,7 @@
 ﻿@using EshopSharedLibrary;
 @using EshopSharedLibrary.Interface
 @inject IShoppingCartService ShoppingCartService
-
+@rendermode InteractiveServer
 <div id="vue-header" class="quenched">
     <header class="border-bottom-color:neutral-000000 border-bottom-style:solid border-bottom-width:1 display:block padding-vertical:8">
         <div class="margin-horizontal:auto max-width:container padding-horizontal:32">
@@ -38,6 +38,17 @@
     protected override void OnInitialized()
     {
         cartCount = ShoppingCartService.Count();
+        ShoppingCartService.OnChange += UpdateCartCount;
+
         base.OnInitialized();
+    }
+    private void UpdateCartCount()
+    {
+        cartCount = ShoppingCartService.Count();
+        InvokeAsync(StateHasChanged); // Trigger component re-render
+    }
+    public void Dispose()
+    {
+        ShoppingCartService.OnChange -= UpdateCartCount;
     }
 }

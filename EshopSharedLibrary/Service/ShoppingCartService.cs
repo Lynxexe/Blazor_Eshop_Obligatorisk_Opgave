@@ -13,7 +13,7 @@ namespace EshopSharedLibrary.Service
     public class ShoppingCartService : IShoppingCartService
     {
         private static ShoppingCart _shoppingCart;
-
+        public event Action OnChange; // Add this event
         public ShoppingCartService() 
         {
             if ( _shoppingCart == null)
@@ -29,21 +29,24 @@ namespace EshopSharedLibrary.Service
             if (existingItem != null)
             {
                 existingItem.UpdateQuantity(product, quantity);
+
             }
             else
             {
                 _shoppingCart.ItemsInCart.Add(new ShoppingCartItem(product, quantity));
+                OnChange?.Invoke();
             }
         }
 
         public int Count()
         {
-            return _shoppingCart.ItemsInCart.Sum(item => item.Quantity);
+            return _shoppingCart.ItemsInCart.Count;
         }
 
         public void DeleteProduct(ShoppingCartItem item)
         {
             _shoppingCart.ItemsInCart.Remove(item);
+            OnChange?.Invoke();
         }
 
         public ShoppingCart Get()

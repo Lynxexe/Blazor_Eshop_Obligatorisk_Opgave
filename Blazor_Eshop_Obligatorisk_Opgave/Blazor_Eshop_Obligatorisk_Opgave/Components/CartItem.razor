@@ -3,7 +3,7 @@
 @using EshopSharedLibrary.Model.ShoppingCart
 @using EshopSharedLibrary.Model.ShoppingCartModel
 @inject IShoppingCartService shoppingcartService
-@rendermode InteractiveAuto
+@rendermode InteractiveServer
 
 @if (Item != null)
 {
@@ -24,8 +24,12 @@
 
     [CascadingParameter(Name = "ShoppingCartCountModel")]
     private ShoppingCartCount? ShoppingCartCountModel { get; set; }
-    private void DeleteCartItem(ShoppingCartItem item)
+
+    [Parameter]
+    public EventCallback<ShoppingCartItem> OnItemDeleted { get; set; }
+    private async Task DeleteCartItem(ShoppingCartItem item)
     {
-        shoppingcartService.DeleteProduct(item);
+        Console.WriteLine("Sletter item");
+        await OnItemDeleted.InvokeAsync(Item);
     }
 }

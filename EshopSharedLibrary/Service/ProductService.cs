@@ -53,5 +53,9 @@ namespace EshopSharedLibrary.Service
         {
             return $"/images/{filename}";
         }
+        public Product GetProductById(int productId)
+        {
+            return products.FirstOrDefault(p => p.Id == productId);
+        }
     }
 }
