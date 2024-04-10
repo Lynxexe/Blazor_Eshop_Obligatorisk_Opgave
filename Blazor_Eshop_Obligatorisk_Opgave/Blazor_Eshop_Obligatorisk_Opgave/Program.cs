@@ -2,6 +2,8 @@ using Blazor_Eshop_Obligatorisk_Opgave.Components;
 using EshopSharedLibrary.Interface;
 using EshopSharedLibrary.Service;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Configuration;
+using Microsoft.JSInterop;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +12,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 builder.Services.AddServerSideBlazor();
-
-
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

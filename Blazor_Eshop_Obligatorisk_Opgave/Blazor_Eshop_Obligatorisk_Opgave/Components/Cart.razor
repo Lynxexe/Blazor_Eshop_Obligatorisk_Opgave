@@ -4,7 +4,7 @@
 @using EshopSharedLibrary.Model.ShoppingCart
 @using EshopSharedLibrary.Model.ShoppingCartModel
 @using EshopSharedLibrary.Model
-
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
 @inject IShoppingCartService shoppingCartService
 @rendermode InteractiveServer
 <h3>Cart</h3>
@@ -25,10 +25,37 @@
                     </RowTemplate>
                 </TableTemplate>
             </div>
+            @if(shoppingCart.ItemsInCart.Count > 0)
+            {
+                <div id="paypal_container"></div>
+            }
+
         </div>
     </main>
 </div>
-
+<script>
+    let container = document.getElementById('paypal_container');
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'pay'
+        },
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '100.00' // Erstat med det ønskede beløb
+                    }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            alert('Betaling gennemført!'); // Valgfri besked til brugeren
+        }
+    }).render(container);
+</script>
 @code {
     private List<TableHeaderName> TableHeaderNames = new() {
         new TableHeaderName("Product", 2),
@@ -49,4 +76,5 @@
         shoppingCartService.DeleteProduct(deletedItem);
         shoppingCart = shoppingCartService.Get();
     }
+
 }
