@@ -14,6 +14,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

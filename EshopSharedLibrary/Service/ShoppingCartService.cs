@@ -58,5 +58,14 @@ namespace EshopSharedLibrary.Service
         {
             return _shoppingCart.ItemsInCart.Any(item => item.Product?.Id == Id);
         }
+        public decimal GetTotal()
+        {
+            decimal total = 0;
+            foreach (var item in _shoppingCart.ItemsInCart)
+            {
+                total += item.TotalPrice; 
+            }
+            return total;
+        }
     }
 }

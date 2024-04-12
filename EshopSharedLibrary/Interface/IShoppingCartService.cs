@@ -17,5 +17,6 @@ namespace EshopSharedLibrary.Interface
             int Count();
             bool HasProduct(int Id);
             event Action OnChange;
+        decimal GetTotal();
     }
 }
