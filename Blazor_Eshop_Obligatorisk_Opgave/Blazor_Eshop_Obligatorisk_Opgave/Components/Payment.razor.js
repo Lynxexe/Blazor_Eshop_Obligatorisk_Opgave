@@ -63,25 +63,27 @@
                         }
                     },
                 })
-            }).then(response => {
-                // Handle response here
-                return response.json(); // Assuming the response is JSON
-            }).then(confirmPaymentResponse => {
-                // Extract orderId or any other necessary data from confirmPaymentResponse if needed
+            })
+            //    .then(response => {
+            //    // Handle response here
+            //    return response.json(); // Assuming the response is JSON
+            //}).then(confirmPaymentResponse => {
+            //    // Extract orderId or any other necessary data from confirmPaymentResponse if needed
 
-                // Authorize payment
-                return fetch(apiCall + 'authorize', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': auth,
-                        'Content-Type': 'application/json; charset=UTF-8',
-                        'PayPal-Request-Id': '7b92603e-77ed-4896-8e78-5dea2050476a' // Replace with your request id
-                    },
-                    body: JSON.stringify({
-                        orderID: orderId
-                    })
-                });
-            }).then(authorizeResponse => {
+            //    // Authorize payment
+            //    return fetch(apiCall + 'authorize', {
+            //        method: 'POST',
+            //        headers: {
+            //            'Authorization': auth,
+            //            'Content-Type': 'application/json; charset=UTF-8',
+            //            'PayPal-Request-Id': '7b92603e-77ed-4896-8e78-5dea2050476a' // Replace with your request id
+            //        },
+            //        body: JSON.stringify({
+            //            orderID: orderId
+            //        })
+            //    });
+            //})
+                .then(authorizeResponse => {
                 // Handle authorization response
                 // Assuming you want to proceed with capturing immediately after authorization
                 return fetch(apiCall + 'capture', {
@@ -94,7 +96,7 @@
                 });
             }).then(captureResponse => {
                 // Handle capture response
-                console.log(captureResponse);
+                console.log('Capture response:', captureResponse);
             }).catch(error => {
                 // Handle errors
                 console.error(error);

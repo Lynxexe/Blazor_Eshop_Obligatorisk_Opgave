@@ -17,28 +17,35 @@
         background-color: #f9f9f9;
     }
 </style>
-
-<div class="login-container">
-    <div class="login-form">
-        <h1>Admin Login</h1>
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" @bind="username" id="username" />
+@if (isLoggedIn)
+{
+    <Orders />
+}
+else
+{
+    <div class="login-container">
+        <div class="login-form">
+            <h1>Admin Login</h1>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" @bind="username" id="username" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" @bind="password" id="password" />
+            </div>
+            <button class="btn btn-primary" @onclick="Login">Login</button>
+            <p>@errorMessage</p>
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" @bind="password" id="password" />
-        </div>
-        <button class="btn btn-primary" @onclick="Login">Login</button>
-        <p>@errorMessage</p>
     </div>
-</div>
+    
+}
 
 @code {
     private string username;
     private string password;
     private string errorMessage;
-
+    private bool isLoggedIn;
     public void Login()
     {
         Console.WriteLine("Login clicked!");
@@ -48,12 +55,13 @@
             // Successful login
             Console.WriteLine("Success");
             errorMessage = "";
-            navMan.NavigateTo("/orders");
+            isLoggedIn = true;
         }
         else
         {
             // Invalid credentials
             errorMessage = "Invalid username or password. Please try again.";
+            isLoggedIn = false;
         }
     }
 }
