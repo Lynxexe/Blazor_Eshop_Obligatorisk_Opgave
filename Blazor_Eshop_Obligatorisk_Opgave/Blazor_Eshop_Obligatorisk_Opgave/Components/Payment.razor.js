@@ -1,6 +1,7 @@
 ﻿function initialisePayPal() {
     if (paypal.Buttons.instances.length >= 1) return;
     let container = document.getElementById('paypal_container');
+    let total = document.getElementById('paypal_container').getAttribute('data-total');
     paypal.Buttons({
         style: {
             shape: 'rect',
@@ -13,7 +14,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '@' // Erstat med det ønskede beløb
+                        value: total // Erstat med det ønskede beløb
                     }
                 }]
             });
@@ -24,15 +25,15 @@
             console.log("Order id: " + orderId)
             let apiCall = 'https://api-m.sandbox.paypal.com/v2/checkout/orders/' + orderId + '/'
             let accessToken;
-            await (async () => {
-                try {
-                    accessToken = await getAccessToken();
-                    console.log("This is the accessToken response: " + accessToken);
-                    console.log("Access token is set: " + accessToken);
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            })();
+    await (async () => {
+        try {
+            accessToken = await getAccessToken();
+            console.log("This is the accessToken response: " + accessToken);
+            console.log("Access token is set: " + accessToken);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    })();
             console.log("This is the accesstokenresponse: "+accessToken)
             let auth = 'Bearer ' + accessToken
             console.log(auth)
