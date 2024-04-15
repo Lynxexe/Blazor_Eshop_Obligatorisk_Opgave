@@ -1,0 +1,29 @@
+﻿@page "/users"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject DBContext DB
+@using EshopSharedLibrary.DBStuff
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="users/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="DB.User">
+    <PropertyColumn Property="user => user.Email" />
+    <PropertyColumn Property="user => user.Password" />
+    <PropertyColumn Property="user => user.Name" />
+    <PropertyColumn Property="user => user.Lastname" />
+    <PropertyColumn Property="user => user.Adress" />
+    <PropertyColumn Property="user => user.ZipCode" />
+    <PropertyColumn Property="user => user.City" />
+    <PropertyColumn Property="user => user.IsAdmin" />
+
+    <TemplateColumn Context="user">
+        <a href="@($"users/edit?id={user.Id}")">Edit</a> |
+        <a href="@($"users/details?id={user.Id}")">Details</a> |
+        <a href="@($"users/delete?id={user.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>

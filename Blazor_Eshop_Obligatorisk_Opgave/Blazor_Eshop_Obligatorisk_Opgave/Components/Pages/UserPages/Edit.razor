@@ -1,0 +1,121 @@
+﻿@page "/Users/edit"
+@inject DBContext DB
+@using EshopSharedLibrary.DBStuff
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h4>User</h4>
+<hr />
+@if (User is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="User" OnValidSubmit="UpdateUser" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="User.Id" value="@User.Id" />
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <InputText id="email" @bind-Value="User.Email" class="form-control" />
+                    <ValidationMessage For="() => User.Email" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <InputText id="password" @bind-Value="User.Password" class="form-control" />
+                    <ValidationMessage For="() => User.Password" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <InputText id="name" @bind-Value="User.Name" class="form-control" />
+                    <ValidationMessage For="() => User.Name" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="lastname" class="form-label">Lastname:</label>
+                    <InputText id="lastname" @bind-Value="User.Lastname" class="form-control" />
+                    <ValidationMessage For="() => User.Lastname" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="adress" class="form-label">Adress:</label>
+                    <InputText id="adress" @bind-Value="User.Adress" class="form-control" />
+                    <ValidationMessage For="() => User.Adress" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="zipcode" class="form-label">ZipCode:</label>
+                    <InputNumber id="zipcode" @bind-Value="User.ZipCode" class="form-control" />
+                    <ValidationMessage For="() => User.ZipCode" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">City:</label>
+                    <InputText id="city" @bind-Value="User.City" class="form-control" />
+                    <ValidationMessage For="() => User.City" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="isadmin" class="form-label">IsAdmin:</label>
+                    <InputCheckbox id="isadmin" @bind-Value="User.IsAdmin" class="form-check-input" />
+                    <ValidationMessage For="() => User.IsAdmin" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/users">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    public User? User { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        User ??= await DB.User.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (User is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see https://aka.ms/RazorPagesCRUD.
+    public async Task UpdateUser()
+    {
+        DB.Attach(User!).State = EntityState.Modified;
+
+        try
+        {
+            await DB.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!UserExists(User!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/users");
+    }
+
+    bool UserExists(int id)
+    {
+        return DB.User.Any(e => e.Id == id);
+    }
+}

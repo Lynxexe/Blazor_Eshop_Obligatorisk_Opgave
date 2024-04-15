@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dedb6a3b-ee89-465c-b711-936bec8176f4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +26,14 @@
     <ProjectReference Include="..\..\EshopSharedLibrary\EshopSharedLibrary.csproj" />
     <ProjectReference Include="..\Blazor_Eshop_Obligatorisk_Opgave.Client\Blazor_Eshop_Obligatorisk_Opgave.Client.csproj" />
     <PackageReference Include="BlazorPageScript" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
