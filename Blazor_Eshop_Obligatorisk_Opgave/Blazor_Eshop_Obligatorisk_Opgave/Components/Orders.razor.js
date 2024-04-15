@@ -44,11 +44,17 @@
         const orders = response.transaction_details;
         console.log('Last 20 orders:', orders);
 
+
         let html = '<div class="container"><table class="table table-bordered text-center"><thead class="thead-dark"><tr><th>Name</th><th>Last Name</th><th>Amount</th><th>Time</th><th>Address</th><th>City</th><th>Country Code</th><th>Postal Code</th></tr></thead><tbody>';
         for (let i = 0; i < orders.length; i += 3) {
             const order = orders[i];
-            console.log(order.shipping_info?.address?.line1)
-            const amount = order.transaction_info.ending_balance.value + ' ' + order.transaction_info.transaction_amount.currency_code;
+            const transactionAmount = parseFloat(order.transaction_info.transaction_amount.value);
+            const feeAmount = parseFloat(order.transaction_info.fee_amount.value);
+            const valueAmount = transactionAmount + feeAmount;
+            console.log(parseFloat(transactionAmount));
+            console.log(parseFloat(feeAmount));
+            const amount = valueAmount + ' ' + order.transaction_info.transaction_amount.currency_code;
+            const roundedAmount = parseFloat(amount).toFixed(2);
             const time = new Date(order.transaction_info.transaction_initiation_date).toLocaleString();
             const address = order.shipping_info?.address?.line1 || 'N/A';
             const city = order.shipping_info?.address?.city || 'N/A';
@@ -57,7 +63,7 @@
             const name = order.payer_info?.payer_name?.given_name || 'N/A';
             const lastName = order.payer_info?.payer_name?.surname || 'N/A';
 
-            html += `<tr><td>${name}</td><td>${lastName}</td><td>${amount}</td><td>${time}</td><td>${address}</td><td>${city}</td><td>${countryCode}</td><td>${postalCode}</td></tr>`;
+            html += `<tr><td>${name}</td><td>${lastName}</td><td>${roundedAmount}</td><td>${time}</td><td>${address}</td><td>${city}</td><td>${countryCode}</td><td>${postalCode}</td></tr>`;
         }
         html += '</tbody></table></div>';
 
