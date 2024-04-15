@@ -1,4 +1,4 @@
-﻿@page "/users/create"
+﻿@page "/CreateAccount"
 @inject DBContext DB
 @using EshopSharedLibrary.DBStuff
 @inject NavigationManager NavigationManager
@@ -48,19 +48,14 @@
                 <label for="city" class="form-label">City:</label> 
                 <InputText id="city" @bind-Value="User.City" class="form-control" /> 
                 <ValidationMessage For="() => User.City" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="isadmin" class="form-label">IsAdmin:</label> 
-                <InputCheckbox id="isadmin" @bind-Value="User.IsAdmin" class="form-check-input" /> 
-                <ValidationMessage For="() => User.IsAdmin" class="text-danger" /> 
-            </div>        
+            </div>            
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
 </div>
 
 <div>
-    <a href="/users">Back to List</a>
+    <a href="/">Gå tilbage</a>
 </div>
 
 @code {
