@@ -12,9 +12,13 @@
         <li>
             <NavLink Match="NavLinkMatch.All" href="/cart">Cart</NavLink>
         </li>
+        @if (!isLoggedIn)
+        {
+            
         <li>
             <NavLink Match="NavLinkMatch.All" href="/CreateAccount">Opret Bruger</NavLink>
         </li>
+        }
         @if (isAdmin == true)
         {
             <li>

@@ -8,7 +8,7 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 @inject IShoppingCartService shoppingCartService
-@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
 <h3>Cart</h3>
 <div id="vue-cart" class="quenched">
     <main class="margin-horizontal:auto max-width:container padding-horizontal:32">

@@ -1,8 +1,17 @@
 ﻿@page "/order-failed"
+@using EshopSharedLibrary.Interface
 @inject NavigationManager NavigationManager
-
-<h3>FailedOrder</h3>
-<p>Order failed</p>
+@inject ILoginService loginService
+@if (success == "false")
+{
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Order Failed</h4>
+        <p>We're sorry, but there was an issue processing your order.</p>
+        <p>Please try again later or <a href="/contact-us">contact us</a> for assistance.</p>
+        <hr>
+        <p class="mb-0">If you have any questions or concerns, please feel free to <a href="/contact-us">contact us</a>. We apologize for any inconvenience.</p>
+    </div>
+}
 
 @code {
     private string success;

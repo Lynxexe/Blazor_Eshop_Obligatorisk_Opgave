@@ -4,6 +4,22 @@
 @using EshopSharedLibrary.Service
 @inject NavigationManager NavigationManager
 @inject IShoppingCartService shoppingCartService;
+@inject NavigationManager NavigationManager
+@inject ILoginService loginService
+
+@if (success == "true")
+{
+
+    <div class="alert alert-success" role="alert">
+        <h3>Order Details</h3>
+        <h4 class="alert-heading">Thank you for your purchase!</h4>
+        <p>Your order with ID <strong>@orderId</strong> has been successfully processed.</p>
+        <p>The total amount charged is <strong>@total</strong>.</p>
+        <hr>
+        <p class="mb-0">If you have any questions or concerns, please feel free to contact us. We're here to help!</p>
+    </div>
+}
+
 
 @code {
     private string orderId;
@@ -25,11 +41,3 @@
         }
     }
 }
-
-<h3>Order Details</h3>
-
-<p>Order ID: @orderId</p>
-<p>Total Amount: @total</p>
-
-
-
