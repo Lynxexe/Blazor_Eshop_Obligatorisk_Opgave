@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EshopSharedLibrary.Json
 {
-    public class ServiceResponse
+    public class ServiceResponse // Ubrugt fra før vi fandt ud af SSR.
     {
         public bool Success { get; set; }
         public string? Message { get; set; }

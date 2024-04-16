@@ -14,6 +14,7 @@ namespace EshopSharedLibrary.Service
     {
         private static ShoppingCart _shoppingCart;
         public event Action OnChange; 
+
         public ShoppingCartService() 
         {
             if ( _shoppingCart == null)
@@ -21,7 +22,6 @@ namespace EshopSharedLibrary.Service
                 _shoppingCart = new ShoppingCart();
             }
         }
-
 
         public void AddProduct(Product product, int quantity)
         {
