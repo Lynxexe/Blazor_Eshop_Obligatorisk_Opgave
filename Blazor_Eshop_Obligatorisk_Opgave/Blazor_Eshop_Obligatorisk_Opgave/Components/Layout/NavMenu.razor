@@ -37,7 +37,6 @@
 
     private async Task Login()
     {
-        // Check if the provided username and password exist in the database
         var user = await dbContext.User.FirstOrDefaultAsync(u => u.Email == username && u.Password == password);
 
         if (user != null)
