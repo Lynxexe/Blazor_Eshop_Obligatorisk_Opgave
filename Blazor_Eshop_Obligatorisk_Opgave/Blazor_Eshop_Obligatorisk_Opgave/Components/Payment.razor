@@ -12,15 +12,12 @@
     [Parameter]
     public EventCallback OnCaptureFailure { get; set; }
 
-
-    // Handle successful capture
     [JSInvokable("HandleCaptureSuccess")]
     public async Task HandleCaptureSuccess()
     {
         await OnCaptureSuccess.InvokeAsync(true);
     }
 
-    // Handle failed capture
     [JSInvokable]
     public async Task HandleCaptureFailure()
     {
