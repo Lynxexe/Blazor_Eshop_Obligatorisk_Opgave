@@ -67,5 +67,9 @@ namespace EshopSharedLibrary.Service
             }
             return total;
         }
+        public void clearCart()
+        {
+            _shoppingCart = new ShoppingCart();
+        }
     }
 }

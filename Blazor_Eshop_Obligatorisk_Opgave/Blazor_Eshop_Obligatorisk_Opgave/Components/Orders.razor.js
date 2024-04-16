@@ -50,7 +50,7 @@
         orders.reverse();
 
         // Start iterating from the 3rd order
-        for (let i = 2; i < Math.min(orders.length, 27); i += 3) {
+        for (let i = 2; i < Math.min(orders.length, 60); i += 3) {
             const order = orders[i];
             const transactionAmount = parseFloat(order.transaction_info.transaction_amount.value);
             const feeAmount = parseFloat(order.transaction_info.fee_amount.value);

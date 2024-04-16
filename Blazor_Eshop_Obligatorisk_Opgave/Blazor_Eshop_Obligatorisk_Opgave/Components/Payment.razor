@@ -1,5 +1,5 @@
 ﻿@inject IJSRuntime JSRuntime
-<PageScript Src="./Components/Payment.razor.js?v=3" />
+<PageScript Src="./Components/Payment.razor.js?v=5" />
 <div id="paypal_container" data-total="@Total"></div>
 
 @code {
@@ -14,7 +14,7 @@
 
 
     // Handle successful capture
-    [JSInvokable]
+    [JSInvokable("HandleCaptureSuccess")]
     public async Task HandleCaptureSuccess()
     {
         await OnCaptureSuccess.InvokeAsync(true);

@@ -80,13 +80,18 @@
                 console.log(' response:', captureResponse);
                 return captureResponse.json();
             }).then(response => {
-                if (response.status === 'COMPLETED') { // Assuming 'COMPLETED' indicates success
-                    // Trigger event to notify Blazor component of successful capture
-                    DotNet.invokeMethodAsync('Blazor_Eshop_Obligatorisk_Opgave.Client', 'HandleCaptureSuccess');
+                if (response.status === 'COMPLETED') {
+                    window.location.href = 'https://localhost:7077/success'
+
+
+                }
+                else {
+                    window.location.href = 'https://localhost:7077/error'
                 }
                 console.log(response.status)
             }).catch(error => {
                 // Handle errors
+                failureCallback();
                 console.error(error);
             });
             alert('Betaling gennemført!'); // Valgfri besked til brugeren

@@ -18,5 +18,6 @@ namespace EshopSharedLibrary.Interface
             bool HasProduct(int Id);
             event Action OnChange;
         decimal GetTotal();
+        void clearCart();
     }
 }

@@ -35,6 +35,7 @@
         </div>
     </main>
 </div>
+
 <script>
 
 </script>
@@ -52,12 +53,14 @@
     {
         shoppingCart = shoppingCartService.Get();
     }
+
     private async Task HandleItemDeleted(ShoppingCartItem deletedItem)
     {
         // Update the cart after item deletion
         shoppingCartService.DeleteProduct(deletedItem);
         shoppingCart = shoppingCartService.Get();
     }
+    [JSInvokable]
     public async Task HandleCaptureSuccess(bool success)
     {
         if (success)
@@ -69,6 +72,7 @@
             NavigationManager.NavigateTo("/error");
         }
     }
+    [JSInvokable]
     public void HandleCaptureFailure()
     {
         NavigationManager.NavigateTo("/error");
