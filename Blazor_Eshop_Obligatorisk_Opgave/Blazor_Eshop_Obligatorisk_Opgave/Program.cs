@@ -21,10 +21,10 @@ builder.Services.AddServerSideBlazor().AddCircuitOptions(o =>
 });
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DBContext") ?? throw new InvalidOperationException("Connection string 'DBContext' not found.")));
-builder.Services.AddScoped<ILoginService, LoginService>();
 
 
 builder.Services.AddQuickGridEntityFrameworkAdapter();;

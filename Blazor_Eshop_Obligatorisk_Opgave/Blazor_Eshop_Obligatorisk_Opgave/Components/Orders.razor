@@ -1,14 +1,34 @@
 ﻿@page "/orders"
+@using EshopSharedLibrary.Interface
 <h3 style="text-align: center;">Orders</h3>
 
 <head>
-    <PageScript Src="./Components/Orders.razor.js?v=1" />
+    <PageScript Src="./Components/Orders.razor.js?v=3" />
 </head>
 
-<div id="orders"></div>
+<div id="orders" @if (!isAdmin) { style="display: none;" }></div>
+   
+
 
 
 @code {
+    [Inject]
+    public ILoginService loginService { get; set; }
+    [Inject]
+    public NavigationManager Navigation { get; set; }
 
+    public bool isAdmin;
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine(loginService.CheckIfAdmin());
+        isAdmin = loginService.CheckIfAdmin();
+        if (!isAdmin)
+        {
+            // Redirect to unauthorized access page or display a message
+            Navigation.NavigateTo("/unauthorized");
+            return;
+        }
 
+        // Proceed with loading orders data
+    }
 }

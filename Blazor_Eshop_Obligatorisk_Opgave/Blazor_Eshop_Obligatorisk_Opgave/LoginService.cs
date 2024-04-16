@@ -1,4 +1,5 @@
-﻿using EshopSharedLibrary.Interface;
+﻿using EshopSharedLibrary.DBStuff;
+using EshopSharedLibrary.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,33 +11,31 @@ namespace Blazor_Eshop_Obligatorisk_Opgave
 {
     public class LoginService : ILoginService
     {
-        private string? username;
-        private string? password;
-        private int Id;
-        private bool isLoggedIn;
-        private bool isAdmin;
-        private  DBContext dbContext;
+        private static User user;
+        private static bool isLoggedIn;
+        private DBContext dbContext;
 
         public LoginService(DBContext db) {
             dbContext = db ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<bool> CheckIfAdmin(string username)
+        public bool CheckIfAdmin()
         {
-            var user = await dbContext.User.FirstOrDefaultAsync(u => u.Email == username);
-            return user != null && user.IsAdmin;
+            return isLoggedIn && user != null && user.IsAdmin;
         }
 
         public async Task Login(string username, string password)
         {
-            var user = await dbContext.User.FirstOrDefaultAsync(u => u.Email == username && u.Password == password);
-            if (user != null)
+            var tempUser = await dbContext.User.FirstOrDefaultAsync(u => u.Email == username && u.Password == password);
+            if (tempUser != null)
             {
+                user = tempUser;
                 isLoggedIn = true;
-                isAdmin = user.IsAdmin;
             }
             else
             {
+                user = null;
+                isLoggedIn = false;
                 throw new Exception("Invalid credentials. Please try again.");
             }
         }

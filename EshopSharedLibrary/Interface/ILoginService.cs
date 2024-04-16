@@ -10,7 +10,7 @@ namespace EshopSharedLibrary.Interface
     {
        Task Login(string username, string password);
 
-        Task<bool> CheckIfAdmin(string username);
+        bool CheckIfAdmin();
 
     }
 }

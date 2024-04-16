@@ -17,7 +17,7 @@
         @if (isAdmin == true)
         {
             <li>
-                <NavLink Match="NavLinkMatch.All" href="/admin">AdminPanel</NavLink>
+                <NavLink Match="NavLinkMatch.All" href="/orders">AdminPanel</NavLink>
             </li>
         }
         <li>
@@ -59,7 +59,7 @@
         {
             await loginService.Login(username, password);
             isLoggedIn = true; 
-            isAdmin = await loginService.CheckIfAdmin(username); 
+            isAdmin = loginService.CheckIfAdmin(); 
         }
         catch (Exception ex)
         {
