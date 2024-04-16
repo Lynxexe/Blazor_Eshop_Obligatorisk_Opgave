@@ -95,10 +95,7 @@
     }
 
     .nav-scrollable {
-        /* Never collapse the sidebar for wide screens */
         display: block;
-
-        /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
@@ -108,7 +105,7 @@
     }
 }
 .main-navigation {
-    position: relative; /* Ensure relative positioning for absolute children */
+    position: relative;
 }
 
 .navigation-links {
@@ -119,10 +116,10 @@
 
     .navigation-links li {
         margin-right: 10px;
-        margin-left: 20px;/* Adjust margin between navigation items */
+        margin-left: 20px;
     }
 
 .login-form {
-    margin: 10px; /* Reset margins */
+    margin: 10px; 
 }
 

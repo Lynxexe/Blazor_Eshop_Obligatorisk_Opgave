@@ -10,8 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Blazor_Eshop_Obligatorisk_Opgave;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
@@ -30,7 +28,6 @@ builder.Services.AddDbContext<DBContext>(options =>
 builder.Services.AddQuickGridEntityFrameworkAdapter();;
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();

@@ -14,7 +14,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: total // Erstat med det ønskede beløb
+                        value: total 
                     }
                 }]
             });
@@ -65,32 +65,27 @@
                     },
                 })
             }).then(authorizeResponse => {
-                // Handle authorization response
-                // Assuming you want to proceed with capturing immediately after authorization
                 return fetch(apiCall + 'capture', {
                     method: 'POST',
                     headers: {
                         'Authorization': auth,
                         'Content-Type': 'application/json; charset=UTF-8',
-                        'PayPal-Request-Id': '7b92603e-77ed-4896-8e78-5dea2050476a' // Replace with your request id
+                        'PayPal-Request-Id': '7b92603e-77ed-4896-8e78-5dea2050476a'
                     }
                 });
             }).then(captureResponse => {
-                // Handle capture response
                 console.log(' response:', captureResponse);
                 return captureResponse.json();
             }).then(response => {
-                if (response.status === 'COMPLETED') { // Assuming 'COMPLETED' indicates success
-                    // Trigger event to notify Blazor component of successful capture
+                if (response.status === 'COMPLETED') {
                     window.location.href = '/order-details?orderId=' + orderId + '&total=' + total + '&success=true';
                 }
                 console.log(response.status)
             }).catch(error => {
-                // Handle errors
                 window.location.href = '/order-failed?success=false';
                 console.error(error);
             });
-            alert('Betaling gennemført!'); // Valgfri besked til brugeren
+            alert('Betaling gennemført!');
         }
     }).render(container);
 }

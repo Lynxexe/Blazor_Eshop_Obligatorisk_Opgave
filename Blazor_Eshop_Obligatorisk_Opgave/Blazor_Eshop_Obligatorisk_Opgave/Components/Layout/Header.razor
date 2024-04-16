@@ -45,7 +45,7 @@
     private void UpdateCartCount()
     {
         cartCount = ShoppingCartService.Count();
-        InvokeAsync(StateHasChanged); // Trigger component re-render
+        InvokeAsync(StateHasChanged);
     }
     public void Dispose()
     {

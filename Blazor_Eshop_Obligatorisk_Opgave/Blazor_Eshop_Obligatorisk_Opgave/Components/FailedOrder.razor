@@ -8,7 +8,6 @@
     private string success;
     protected override void OnInitialized()
     {
-        // Retrieve order information from query parameters
         var uri = new Uri(NavigationManager.Uri);
         var queryString = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
         success = queryString["success"];

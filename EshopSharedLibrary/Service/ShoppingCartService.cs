@@ -13,7 +13,7 @@ namespace EshopSharedLibrary.Service
     public class ShoppingCartService : IShoppingCartService
     {
         private static ShoppingCart _shoppingCart;
-        public event Action OnChange; // Add this event
+        public event Action OnChange; 
         public ShoppingCartService() 
         {
             if ( _shoppingCart == null)

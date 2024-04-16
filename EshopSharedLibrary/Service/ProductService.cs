@@ -5,10 +5,10 @@ using EshopSharedLibrary.Model.ProductModel;
 
 namespace EshopSharedLibrary.Service
 {
-    public class ProductService : IProductService //Skal håndtere på ServerSiden, ClientService er beregnet til at blive brugt på Client-siden og kommunikere via HTTP Requests.
+    public class ProductService : IProductService
     {
         public List<Product> products;
-        public List<Product> cart = new List<Product>(); //Bruges ikke.
+        public List<Product> cart = new List<Product>();
 
         public ProductService()
         {

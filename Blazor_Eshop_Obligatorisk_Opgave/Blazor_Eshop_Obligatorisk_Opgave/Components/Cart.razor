@@ -56,7 +56,6 @@
 
     private async Task HandleItemDeleted(ShoppingCartItem deletedItem)
     {
-        // Update the cart after item deletion
         shoppingCartService.DeleteProduct(deletedItem);
         shoppingCart = shoppingCartService.Get();
     }

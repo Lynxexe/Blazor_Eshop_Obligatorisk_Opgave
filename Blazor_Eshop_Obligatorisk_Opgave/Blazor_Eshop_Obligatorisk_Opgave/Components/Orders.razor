@@ -24,11 +24,8 @@
         isAdmin = loginService.CheckIfAdmin();
         if (!isAdmin)
         {
-            // Redirect to unauthorized access page or display a message
             Navigation.NavigateTo("/unauthorized");
             return;
         }
-
-        // Proceed with loading orders data
     }
 }
