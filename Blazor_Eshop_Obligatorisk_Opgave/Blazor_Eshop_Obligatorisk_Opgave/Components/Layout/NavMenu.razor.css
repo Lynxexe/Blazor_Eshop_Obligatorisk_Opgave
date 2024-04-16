@@ -102,9 +102,27 @@
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
-    .login-form {
+    .links {
         display: flex;
         align-items: center;
-        margin-left: 20px;
     }
 }
+.main-navigation {
+    position: relative; /* Ensure relative positioning for absolute children */
+}
+
+.navigation-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+    .navigation-links li {
+        margin-right: 10px;
+        margin-left: 20px;/* Adjust margin between navigation items */
+    }
+
+.login-form {
+    margin: 10px; /* Reset margins */
+}
+

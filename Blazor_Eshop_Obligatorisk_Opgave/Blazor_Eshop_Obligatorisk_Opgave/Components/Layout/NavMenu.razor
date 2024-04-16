@@ -1,34 +1,43 @@
 ﻿@using Microsoft.EntityFrameworkCore
-<nav aria-labelledby="main-navigation-desktop-heading" class="display:flex position:absolute margin-left:-12 pos-left:0">
+<nav aria-labelledby="main-navigation-desktop-heading" class="main-navigation">
     <h2 id="main-navigation-desktop-heading" class="visually-hidden">Main navigation</h2>
-    <ul class="display: flex; align-items\:center">
-        <li class="links">
+    <ul class="navigation-links">
+        <li>
             <NavLink Match="NavLinkMatch.All" href="/">Home</NavLink>
+        </li>
+        <li>
             <NavLink Match="NavLinkMatch.All" href="/cart">Cart</NavLink>
+        </li>
+        <li>
             <NavLink Match="NavLinkMatch.All" href="/CreateAccount">Opret Bruger</NavLink>
-            @if(isAdmin == true)
-            {
+        </li>
+        @if (isAdmin == true)
+        {
+            <li>
                 <NavLink Match="NavLinkMatch.All" href="/admin">AdminPanel</NavLink>
-            }
-            @if (isLoggedIn == false)
+            </li>
+        }
+        <li>
+            @if (!isLoggedIn)
             {
-            <li class="links">
-                <form @onsubmit="Login">
+                <form @onsubmit="Login" class="login-form">
                     <label for="username">Email:</label>
                     <input type="text" id="username" @bind="username" />
                     <label for="password">Password:</label>
                     <input type="password" id="password" @bind="password" />
                     <button type="submit">Login</button>
                 </form>
-            </li>
             }
             @if (isLoggedIn)
             {
-            <p>Logged in as: @username</p>
+                <p>Logged in as: @username</p>
             }
         </li>
     </ul>
 </nav>
+
+
+
 
 @code {
     private string username;
@@ -50,8 +59,6 @@
         }
         else
         {
-            //Vis fejl
         }
     }
-}
 }
