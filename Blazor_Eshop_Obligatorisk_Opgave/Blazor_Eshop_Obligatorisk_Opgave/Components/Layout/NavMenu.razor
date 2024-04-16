@@ -1,11 +1,64 @@
-﻿<nav aria-labelledby="main-navigation-desktop-heading" class="display:flex position:absolute margin-left:-12 pos-left:0">
+﻿@using Microsoft.EntityFrameworkCore
+<nav aria-labelledby="main-navigation-desktop-heading" class="main-navigation">
     <h2 id="main-navigation-desktop-heading" class="visually-hidden">Main navigation</h2>
-    <ul class="display: flex; align-items\:center">
-        <li class="links">
+    <ul class="navigation-links">
+        <li>
             <NavLink Match="NavLinkMatch.All" href="/">Home</NavLink>
+        </li>
+        <li>
             <NavLink Match="NavLinkMatch.All" href="/cart">Cart</NavLink>
+        </li>
+        <li>
             <NavLink Match="NavLinkMatch.All" href="/CreateAccount">Opret Bruger</NavLink>
-            <NavLink Match="NavLinkMatch.All" href="/admin">AdminPanel</NavLink>
+        </li>
+        @if (isAdmin == true)
+        {
+            <li>
+                <NavLink Match="NavLinkMatch.All" href="/admin">AdminPanel</NavLink>
+            </li>
+        }
+        <li>
+            @if (!isLoggedIn)
+            {
+                <form @onsubmit="Login" class="login-form">
+                    <label for="username">Email:</label>
+                    <input type="text" id="username" @bind="username" />
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" @bind="password" />
+                    <button type="submit">Login</button>
+                </form>
+            }
+            @if (isLoggedIn)
+            {
+                <p>Logged in as: @username</p>
+            }
         </li>
     </ul>
 </nav>
+
+
+
+
+@code {
+    private string username;
+    private string password;
+    private bool isLoggedIn;
+    private bool isAdmin;
+
+    [Inject]
+    private DBContext dbContext { get; set; }
+
+    private async Task Login()
+    {
+        var user = await dbContext.User.FirstOrDefaultAsync(u => u.Email == username && u.Password == password);
+
+        if (user != null)
+        {
+            isLoggedIn = true;
+            isAdmin = user.IsAdmin;
+        }
+        else
+        {
+        }
+    }
+}
