@@ -6,10 +6,13 @@
             <NavLink Match="NavLinkMatch.All" href="/">Home</NavLink>
             <NavLink Match="NavLinkMatch.All" href="/cart">Cart</NavLink>
             <NavLink Match="NavLinkMatch.All" href="/CreateAccount">Opret Bruger</NavLink>
-            <NavLink Match="NavLinkMatch.All" href="/admin">AdminPanel</NavLink>
+            @if(isAdmin == true)
+            {
+                <NavLink Match="NavLinkMatch.All" href="/admin">AdminPanel</NavLink>
+            }
             @if (isLoggedIn == false)
             {
-            <li class="login-form">
+            <li class="links">
                 <form @onsubmit="Login">
                     <label for="username">Email:</label>
                     <input type="text" id="username" @bind="username" />
@@ -31,6 +34,7 @@
     private string username;
     private string password;
     private bool isLoggedIn;
+    private bool isAdmin;
 
     [Inject]
     private DBContext dbContext { get; set; }
@@ -42,6 +46,7 @@
         if (user != null)
         {
             isLoggedIn = true;
+            isAdmin = user.IsAdmin;
         }
         else
         {
