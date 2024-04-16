@@ -5,7 +5,8 @@
 @using EshopSharedLibrary.Model.ShoppingCartModel
 @using EshopSharedLibrary.Model
 @using Blazor_Eshop_Obligatorisk_Opgave.Components
-@inject Microsoft.JSInterop.IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 @inject IShoppingCartService shoppingCartService
 @rendermode InteractiveServer
 <h3>Cart</h3>
@@ -57,5 +58,19 @@
         shoppingCartService.DeleteProduct(deletedItem);
         shoppingCart = shoppingCartService.Get();
     }
-
+    public async Task HandleCaptureSuccess(bool success)
+    {
+        if (success)
+        {
+            NavigationManager.NavigateTo("/success");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/error");
+        }
+    }
+    public void HandleCaptureFailure()
+    {
+        NavigationManager.NavigateTo("/error");
+    }
 }

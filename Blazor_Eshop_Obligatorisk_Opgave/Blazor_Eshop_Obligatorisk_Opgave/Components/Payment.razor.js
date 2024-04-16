@@ -23,6 +23,7 @@
             let orderId = data.orderID
             console.log(data)
             console.log("Order id: " + orderId)
+            console.log("Newest line again")
             let apiCall = 'https://api-m.sandbox.paypal.com/v2/checkout/orders/' + orderId + '/'
             let accessToken;
     await (async () => {
@@ -37,7 +38,7 @@
             console.log("This is the accesstokenresponse: "+accessToken)
             let auth = 'Bearer ' + accessToken
             console.log(auth)
-            return fetch(apiCall + 'confirm-payment-source', {
+            const orderResponse = fetch(apiCall + 'confirm-payment-source', {
                 method: 'POST',
                 headers: {
                     'Authorization': auth,
@@ -63,27 +64,7 @@
                         }
                     },
                 })
-            })
-            //    .then(response => {
-            //    // Handle response here
-            //    return response.json(); // Assuming the response is JSON
-            //}).then(confirmPaymentResponse => {
-            //    // Extract orderId or any other necessary data from confirmPaymentResponse if needed
-
-            //    // Authorize payment
-            //    return fetch(apiCall + 'authorize', {
-            //        method: 'POST',
-            //        headers: {
-            //            'Authorization': auth,
-            //            'Content-Type': 'application/json; charset=UTF-8',
-            //            'PayPal-Request-Id': '7b92603e-77ed-4896-8e78-5dea2050476a' // Replace with your request id
-            //        },
-            //        body: JSON.stringify({
-            //            orderID: orderId
-            //        })
-            //    });
-            //})
-                .then(authorizeResponse => {
+            }).then(authorizeResponse => {
                 // Handle authorization response
                 // Assuming you want to proceed with capturing immediately after authorization
                 return fetch(apiCall + 'capture', {
@@ -96,12 +77,18 @@
                 });
             }).then(captureResponse => {
                 // Handle capture response
-                console.log('Capture response:', captureResponse);
+                console.log(' response:', captureResponse);
+                return captureResponse.json();
+            }).then(response => {
+                if (response.status === 'COMPLETED') { // Assuming 'COMPLETED' indicates success
+                    // Trigger event to notify Blazor component of successful capture
+                    DotNet.invokeMethodAsync('Blazor_Eshop_Obligatorisk_Opgave.Client', 'HandleCaptureSuccess');
+                }
+                console.log(response.status)
             }).catch(error => {
                 // Handle errors
                 console.error(error);
             });
-            
             alert('Betaling gennemført!'); // Valgfri besked til brugeren
         }
     }).render(container);
@@ -131,4 +118,10 @@ function getAccessToken() {
 
 export function onUpdate() {
     initialisePayPal();
+}
+export function onLoad() {
+    initialisePayPal();
+}
+export function onDispose() {
+    console.log('Dispose');
 }

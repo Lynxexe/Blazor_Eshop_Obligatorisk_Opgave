@@ -1,8 +1,29 @@
-﻿<PageScript Src="./Components/Payment.razor.js" />
+﻿@inject IJSRuntime JSRuntime
+<PageScript Src="./Components/Payment.razor.js?v=3" />
 <div id="paypal_container" data-total="@Total"></div>
-
 
 @code {
     [Parameter]
     public decimal Total { get; set; }
+
+    public DateTime Date = DateTime.Now;
+    [Parameter]
+    public EventCallback<bool> OnCaptureSuccess { get; set; }
+    [Parameter]
+    public EventCallback OnCaptureFailure { get; set; }
+
+
+    // Handle successful capture
+    [JSInvokable]
+    public async Task HandleCaptureSuccess()
+    {
+        await OnCaptureSuccess.InvokeAsync(true);
+    }
+
+    // Handle failed capture
+    [JSInvokable]
+    public async Task HandleCaptureFailure()
+    {
+        await OnCaptureFailure.InvokeAsync();
+    }
 }

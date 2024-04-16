@@ -102,3 +102,6 @@ function getAccessToken() {
 export function onUpdate() {
     getOrders();
 }
+export function onLoad() {
+    getOrders();
+}

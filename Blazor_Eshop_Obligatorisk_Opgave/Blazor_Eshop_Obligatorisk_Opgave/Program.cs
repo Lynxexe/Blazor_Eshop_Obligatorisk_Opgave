@@ -14,7 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
-builder.Services.AddServerSideBlazor();
+builder.Services.AddServerSideBlazor().AddCircuitOptions(o =>
+{
+    o.DetailedErrors = true;
+});
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddRazorPages();
