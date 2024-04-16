@@ -13,7 +13,7 @@
         const query = new URLSearchParams({
             start_date: formattedStartDate,
             end_date: currentDate.toISOString(),
-            page_size: '100',
+            page_size: '500',
             fields: [
                 'transaction_info',
                 'payer_info',
@@ -42,19 +42,21 @@
         });
         console.log(response)
         const orders = response.transaction_details;
-        console.log('Last 20 orders:', orders);
 
 
-        let html = '<div class="container"><table class="table table-bordered text-center"><thead class="thead-dark"><tr><th>Name</th><th>Last Name</th><th>Amount</th><th>Time</th><th>Address</th><th>City</th><th>Country Code</th><th>Postal Code</th></tr></thead><tbody>';
-        for (let i = 0; i < orders.length; i += 3) {
+        let html = '<div class="container"><table class="table table-bordered text-center"><thead class="thead-dark"><tr><th>Index</th><th>Name</th><th>Last Name</th><th>Amount</th><th>Time</th><th>Address</th><th>City</th><th>Country Code</th><th>Postal Code</th></tr></thead><tbody>';
+
+        // Reverse the orders list
+        orders.reverse();
+
+        // Start iterating from the 3rd order
+        for (let i = 2; i < Math.min(orders.length, 27); i += 3) {
             const order = orders[i];
             const transactionAmount = parseFloat(order.transaction_info.transaction_amount.value);
             const feeAmount = parseFloat(order.transaction_info.fee_amount.value);
             const valueAmount = transactionAmount + feeAmount;
-            console.log(parseFloat(transactionAmount));
-            console.log(parseFloat(feeAmount));
-            const amount = valueAmount + ' ' + order.transaction_info.transaction_amount.currency_code;
-            const roundedAmount = parseFloat(amount).toFixed(2);
+            const amount = valueAmount;
+            const roundedAmount = parseFloat(amount).toFixed(2) + ' ' + order.transaction_info.transaction_amount.currency_code;
             const time = new Date(order.transaction_info.transaction_initiation_date).toLocaleString();
             const address = order.shipping_info?.address?.line1 || 'N/A';
             const city = order.shipping_info?.address?.city || 'N/A';
@@ -63,9 +65,14 @@
             const name = order.payer_info?.payer_name?.given_name || 'N/A';
             const lastName = order.payer_info?.payer_name?.surname || 'N/A';
 
-            html += `<tr><td>${name}</td><td>${lastName}</td><td>${roundedAmount}</td><td>${time}</td><td>${address}</td><td>${city}</td><td>${countryCode}</td><td>${postalCode}</td></tr>`;
+            const index = Math.ceil(i / 3); // Adjust index accordingly
+
+            html += `<tr><td>${index}</td><td>${name}</td><td>${lastName}</td><td>${roundedAmount}</td><td>${time}</td><td>${address}</td><td>${city}</td><td>${countryCode}</td><td>${postalCode}</td></tr>`;
         }
+
         html += '</tbody></table></div>';
+
+
 
 
 
