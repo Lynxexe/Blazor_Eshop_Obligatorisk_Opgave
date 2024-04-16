@@ -1,4 +1,7 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using EshopSharedLibrary.Interface
+@using EshopSharedLibrary.Service
+@using Microsoft.EntityFrameworkCore
+
 <nav aria-labelledby="main-navigation-desktop-heading" class="main-navigation">
     <h2 id="main-navigation-desktop-heading" class="visually-hidden">Main navigation</h2>
     <ul class="navigation-links">
@@ -20,7 +23,7 @@
         <li>
             @if (!isLoggedIn)
             {
-                <form @onsubmit="Login" class="login-form">
+                <form @onsubmit="HandleLogin" class="login-form">
                     <label for="username">Email:</label>
                     <input type="text" id="username" @bind="username" />
                     <label for="password">Password:</label>
@@ -40,25 +43,27 @@
 
 
 @code {
-    private string username;
-    private string password;
+    [Inject]
+    public ILoginService loginService { get; set; }
+
+    private string? username;
+    private string? password;
     private bool isLoggedIn;
     private bool isAdmin;
 
-    [Inject]
-    private DBContext dbContext { get; set; }
 
-    private async Task Login()
+
+    private async Task HandleLogin()
     {
-        var user = await dbContext.User.FirstOrDefaultAsync(u => u.Email == username && u.Password == password);
-
-        if (user != null)
+        try
         {
-            isLoggedIn = true;
-            isAdmin = user.IsAdmin;
+            await loginService.Login(username, password);
+            isLoggedIn = true; 
+            isAdmin = await loginService.CheckIfAdmin(username); 
         }
-        else
+        catch (Exception ex)
         {
+            Console.WriteLine(ex.Message);
         }
     }
 }

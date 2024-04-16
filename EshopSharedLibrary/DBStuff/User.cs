@@ -18,4 +18,5 @@ namespace EshopSharedLibrary.DBStuff
         public string? City { get; set; }
         public bool IsAdmin { get; set; }
     }
+
 }

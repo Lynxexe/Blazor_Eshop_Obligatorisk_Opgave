@@ -7,6 +7,7 @@ using Microsoft.JSInterop;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
+using Blazor_Eshop_Obligatorisk_Opgave;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ builder.Services.AddSingleton<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DBContext") ?? throw new InvalidOperationException("Connection string 'DBContext' not found.")));
+builder.Services.AddScoped<ILoginService, LoginService>();
+
 
 builder.Services.AddQuickGridEntityFrameworkAdapter();;
 var app = builder.Build();
