@@ -80,18 +80,14 @@
                 console.log(' response:', captureResponse);
                 return captureResponse.json();
             }).then(response => {
-                if (response.status === 'COMPLETED') {
-                    window.location.href = 'https://localhost:7077/success'
-
-
-                }
-                else {
-                    window.location.href = 'https://localhost:7077/error'
+                if (response.status === 'COMPLETED') { // Assuming 'COMPLETED' indicates success
+                    // Trigger event to notify Blazor component of successful capture
+                    window.location.href = '/order-details?orderId=' + orderId + '&total=' + total + '&success=true';
                 }
                 console.log(response.status)
             }).catch(error => {
                 // Handle errors
-                failureCallback();
+                window.location.href = '/order-failed?success=false';
                 console.error(error);
             });
             alert('Betaling gennemført!'); // Valgfri besked til brugeren

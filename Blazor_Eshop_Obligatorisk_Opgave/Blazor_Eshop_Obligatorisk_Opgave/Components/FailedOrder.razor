@@ -1,0 +1,16 @@
+﻿@page "/order-failed"
+@inject NavigationManager NavigationManager
+
+<h3>FailedOrder</h3>
+<p>Order failed</p>
+
+@code {
+    private string success;
+    protected override void OnInitialized()
+    {
+        // Retrieve order information from query parameters
+        var uri = new Uri(NavigationManager.Uri);
+        var queryString = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+        success = queryString["success"];
+    }
+}

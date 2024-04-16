@@ -1,6 +1,7 @@
 ﻿@using EshopSharedLibrary.Interface
 @using EshopSharedLibrary.Service
 @using Microsoft.EntityFrameworkCore
+@inject ILoginService loginService
 
 <nav aria-labelledby="main-navigation-desktop-heading" class="main-navigation">
     <h2 id="main-navigation-desktop-heading" class="visually-hidden">Main navigation</h2>
@@ -40,11 +41,7 @@
 </nav>
 
 
-
-
 @code {
-    [Inject]
-    public ILoginService loginService { get; set; }
 
     private string? username;
     private string? password;
