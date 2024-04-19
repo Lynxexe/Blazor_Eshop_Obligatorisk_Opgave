@@ -2,7 +2,7 @@
 @using EshopSharedLibrary.Service
 @using Microsoft.EntityFrameworkCore
 @inject ILoginService loginService
-
+@inject IJSRuntime JSRuntime
 <nav aria-labelledby="main-navigation-desktop-heading" class="main-navigation">
     <h2 id="main-navigation-desktop-heading" class="visually-hidden">Main navigation</h2>
     <ul class="navigation-links">
@@ -51,20 +51,23 @@
     private string? password;
     private bool isLoggedIn;
     private bool isAdmin;
-
+    private string errorMessage;
 
 
     private async Task HandleLogin()
     {
         try
         {
+            
             await loginService.Login(username, password);
             isLoggedIn = true; 
             isAdmin = loginService.CheckIfAdmin(); 
         }
         catch (Exception ex)
         {
+            errorMessage = ex.Message;
             Console.WriteLine(ex.Message);
+            await JSRuntime.InvokeVoidAsync("alert", "Login failed: " + errorMessage);
         }
     }
 }
